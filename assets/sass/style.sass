@@ -2,8 +2,39 @@
 
 $font-press: 'Press Start 2P', cursive
 $font-roboto: 'Roboto', sans-serif
-
-body 
+ul
+	list-style: none
+	padding: 0
+	margin: 0
+input
+	border: none
+	padding: 0
+body
 	background-image: radial-gradient(circle at 50% -20.71%, #f4e9c7 0, #efeac7 6.25%, #eaecc8 12.5%, #e5edca 18.75%, #e0eecc 25%, #dbefcf 31.25%, #d6f0d2 37.5%, #d2f1d6 43.75%, #cdf2da 50%, #c9f3de 56.25%, #c5f3e3 62.5%, #c2f3e7 68.75%, #bff3ec 75%, #bdf3f0 81.25%, #bcf3f5 87.5%, #bcf3f9 93.75%, #bcf2fd 100%)
 	height: 100vh
-	
+	display: flex
+	justify-content: center
+	align-items: center
+	background: black
+	flex-direction: column
+	color: lime
+.container
+	max-width: 1200px
+	margin: auto
+	padding: 10px
+.exercise
+	&__hidden
+		visibility: hidden
+	&__visible
+		visibility: visible
+		color: #0000ff
+.exercise__input
+	width: 100px
+	border-radius: 10px
+	padding-left: 10px
+.exercise__input_correct
+	background-color: lime
+.exercise__input_wrong
+	background-color: red
+.exercise__input_gray
+	background-color: gray
