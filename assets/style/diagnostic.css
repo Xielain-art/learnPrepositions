@@ -23,3 +23,11 @@
     flex-wrap: wrap;
   }
 }
+
+.link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.link:hover {
+  color: #0000ff;
+}

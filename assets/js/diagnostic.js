@@ -2,6 +2,8 @@ const checkBtn = document.querySelector(".check__answers");
 const inputs = document.querySelectorAll(".exercise__input");
 const correctAnswers = document.querySelector(".answers__correct");
 const totalAnswers = document.querySelector(".answers__total");
+const diagnosticOk = document.querySelector(".diagnostic__ok");
+const diagnosticBad = document.querySelector(".diagnostic__bad");
 
 totalAnswers.innerText = inputs.length;
 
@@ -15,7 +17,7 @@ const checkAnswers = function () {
   inputs.forEach((input) => {
     const value = input.getAttribute("correct-value");
     const span = input.parentElement.querySelector("span");
-    span.innerText = `Richtige Antwort ${value}`;
+    span.innerText = `Richtige Antwort: ${value}`;
     if (value === input.value) {
       input.classList.add("exercise__input_correct");
       removeClass(input, "exercise__input_gray");
@@ -38,6 +40,8 @@ const checkAnswers = function () {
         .querySelector("span")
         .classList.add("exercise__visible", "magictime", "puffIn")
     );
+    if (points === inputs.length) diagnosticOk.classList.remove("hidden");
+    if (points !== inputs.length) diagnosticBad.classList.remove("hidden");
   }
 };
 
