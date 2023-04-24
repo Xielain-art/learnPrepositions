@@ -1,37 +1,6 @@
 type Question = { text: string; correctAnswer: string };
 type QuestionList = Array<Question>;
 
-const questions: QuestionList = [
-  {
-    text: "1. Der Eilzug fuhr einen schönen Fluss … .",
-    correctAnswer: "entlang",
-  },
-  { text: "2. Die Erde bewegt sich … die Sonne.", correctAnswer: "um" },
-  {
-    text: "3. Halle liegt … Leipzig und Halberstadt.",
-    correctAnswer: "zwischen",
-  },
-  {
-    text: "4. Die Jacke hängt … dem Stuhl.",
-    correctAnswer: "über",
-  },
-  {
-    text: "5. Jetzt sitzen wir wirklich … den Stühlen.",
-    correctAnswer: "zwischen",
-  },
-  {
-    text: "6. Die Serviette ist … den Stuhl gefallen.",
-    correctAnswer: "unter",
-  },
-  { text: "7. … der Heimat ist es am schönsten.", correctAnswer: "In" },
-  {
-    text: "8. Sie können ihren Wagen … dem Parkplatz stellen.",
-    correctAnswer: "auf",
-  },
-  { text: "9. … dem Fenster blühen schöne Blumen.", correctAnswer: "Vor" },
-  { text: "10. … dem Haus liegt ein Geschäft.", correctAnswer: "Neben" },
-];
-
 class Exercise {
   public questionNodes: Array<HTMLLIElement> = [];
   private exerciseWrapper: HTMLDivElement;
@@ -42,12 +11,12 @@ class Exercise {
   private exerciseAnswersCorrect: number = 0;
   private exerciseTotal: number;
   private exerciseTitle: HTMLElement;
-  private exerciseSubTitle: HTMLElement
+  private exerciseSubTitle: HTMLElement;
   constructor(
     public questionList: QuestionList,
     public rootId: string,
     public title: string,
-    public subTitle: string
+    public subTitle?: string
   ) {}
 
   private checkAnswers() {
@@ -80,7 +49,7 @@ class Exercise {
   createQuestionNodes() {
     this.questionList.forEach((question) => {
       let formattedQuestion = question.text.replaceAll(
-        "…",
+        "$i",
         `<input type="text" class='exercise__input' correct-answer=${question.correctAnswer}>`
       );
       const liQuestion: HTMLLIElement = document.createElement("li");
@@ -97,13 +66,15 @@ class Exercise {
     this.exerciseBtn = document.createElement("button");
     this.exerciseAnswers = document.createElement("div");
     this.exerciseTitle = document.createElement("h1");
-    this.exerciseSubTitle = document.createElement('h2')
+    this.exerciseSubTitle = document.createElement("h2");
 
     this.exerciseWrapper.classList.add("exercise");
     this.exerciseBody.classList.add("exercise__body");
     this.exerciseFooter.classList.add("exercise__footer");
     this.exerciseTitle.innerText = this.title;
-    this.exerciseSubTitle.innerText = this.subTitle
+    if (this.subTitle) {
+      this.exerciseSubTitle.innerText = this.subTitle;
+    }
     this.exerciseBtn.innerText = "Prüfen";
 
     this.exerciseAnswers.insertAdjacentHTML(
@@ -114,7 +85,7 @@ class Exercise {
     this.exerciseFooter.append(this.exerciseBtn, this.exerciseAnswers);
     this.exerciseWrapper.append(
       this.exerciseTitle,
-      this.exerciseSubTitle
+      this.exerciseSubTitle,
       this.exerciseBody,
       this.exerciseFooter
     );
@@ -129,10 +100,89 @@ class Exercise {
   }
 }
 
+const questions: QuestionList = [
+  {
+    text: "1. Der Eilzug fuhr einen schönen Fluss $i .",
+    correctAnswer: "entlang",
+  },
+  { text: "2. Die Erde bewegt sich $i die Sonne.", correctAnswer: "um" },
+  {
+    text: "3. Halle liegt $i Leipzig und Halberstadt.",
+    correctAnswer: "zwischen",
+  },
+  {
+    text: "4. Die Jacke hängt $i dem Stuhl.",
+    correctAnswer: "über",
+  },
+  {
+    text: "5. Jetzt sitzen wir wirklich $i den Stühlen.",
+    correctAnswer: "zwischen",
+  },
+  {
+    text: "6. Die Serviette ist $i den Stuhl gefallen.",
+    correctAnswer: "unter",
+  },
+  { text: "7. $i der Heimat ist es am schönsten.", correctAnswer: "In" },
+  {
+    text: "8. Sie können ihren Wagen $i dem Parkplatz stellen.",
+    correctAnswer: "auf",
+  },
+  { text: "9. $i dem Fenster blühen schöne Blumen.", correctAnswer: "Vor" },
+  { text: "10. $i dem Haus liegt ein Geschäft.", correctAnswer: "Neben" },
+];
+
 const ex1 = new Exercise(
   questions,
   "ex1",
-  "Übung 1. Ordnen Sie Präpositionen!"
+  "Übung 1. Ordnen Sie Präpositionen!",
   " entlang, zwischen, um, unter, auf, neben, in, zwischen, über, vor"
 );
+const questions2: QuestionList = [
+  {
+    text: "1. Anna geht in $i Garten.",
+    correctAnswer: "den",
+  },
+  {
+    text: "2. Die Kinder laufen auf $i Wiese.",
+    correctAnswer: "der",
+  },
+  {
+    text: "3. Wir fahren an $i Meer.",
+    correctAnswer: "das",
+  },
+  {
+    text: "4. Ich gehe in $i Kino.",
+    correctAnswer: "",
+  },
+  {
+    text: "5. Die Kinder spielen auf $i Hof. ",
+    correctAnswer: "dem",
+  },
+  {
+    text: "6. Wir verbringen den Sommer an $i Meer.",
+    correctAnswer: "dem",
+  },
+  {
+    text: "7. Der Teddy sitzt unter $i Tisch.",
+    correctAnswer: "das",
+  },
+  {
+    text: "8. Der Schüler legt den Kuli neben $i Heft. (wohin) das",
+    correctAnswer: "der",
+  },
+  {
+    text: "9. Der Teppich liegt vor $i Tür.",
+    correctAnswer: "die",
+  },
+  {
+    text: "10. Der Vater stellt den Stuhl zwischen $i Stehlampe und … Fenster. (Wohin?)",
+    correctAnswer: "das",
+  },
+];
+const ex2 = new Exercise(
+  questions2,
+  "ex2",
+  "Übung 2. Setzen Sie den nötigen Artikel in der richtigen Form ein."
+);
 ex1.render();
+ex2.render();
