@@ -1,3 +1,6 @@
+body {
+  padding-top: 800px;
+}
 ul {
   list-style: none;
   padding: 0;
@@ -58,4 +61,9 @@ h2 {
 
 .blue {
   color: #0000ff;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
 }

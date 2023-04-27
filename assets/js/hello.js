@@ -16,7 +16,7 @@ let timeout = 0;
 
 function typing_text() {
   spans[count].classList.add("visible");
-  if (spans[count].innerText == " " || spans[count].innerHTML == " ") {
+  if (spans[count].innerText === " " || spans[count].innerHTML === " ") {
     timeout = Math.floor(Math.random() * Math.floor(100));
     spans[count].classList.add("cursor");
   } else {
